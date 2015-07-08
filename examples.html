@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="scAlert.js"></script>
+    <script>
+
+        angular
+            .module('test', ['sc-alert'])
+            .controller('testController', function($scope, scAlert) {
+                $scope.alert = scAlert.alert;
+            });
+
+    </script>
+</head>
+<body ng-app="test" ng-controller="testController">
+
+<div class="container">
+
+    <h1>SC Alert</h1>
+
+    <br>
+
+    <h4>Four bootstrap styles</h4>
+    <div class="panel-body">
+        <button class="btn btn-success" ng-click="alert('success', 'Message example')">Success</button>
+        <button class="btn btn-info" ng-click="alert('info', 'Message example')">Info</button>
+        <button class="btn btn-warning" ng-click="alert('warning', 'Message example')">Warning</button>
+        <button class="btn btn-danger" ng-click="alert('danger', 'Message example')">Danger</button>
+    </div>
+
+    <h4>Optional dismiss button</h4>
+    <div class="panel-body">
+        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {dismissible: false})">Not dismissable</button>
+    </div>
+
+    <h4>Configurable parent element</h4>
+    <div id="parent" class="panel-body">
+        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {parent: '#parent'})">Custom parent</button>
+    </div>
+
+    <h4>Animated (animate.css)</h4>
+    <div class="panel-body">
+        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {classes: {animated: true, fadeInDown: true}})">Custom parent</button>
+    </div>
+
+    <h4>Without timeout</h4>
+    <div class="panel-body">
+        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {timeout: false})">Custom parent</button>
+    </div>
+
+    <h4>Html content</h4>
+    <div class="panel-body">
+        <button class="btn btn-success" ng-click="alert('success', 'Text <a href=\'#\'>Link</a> <b>Bold</b>', null, {html: true})">Custom parent</button>
+    </div>
+
+</div>
+
+</body>
+</html>
