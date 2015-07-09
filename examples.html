@@ -11,8 +11,8 @@
 
         angular
             .module('test', ['sc-alert'])
-            .controller('testController', function($scope, scAlert) {
-                $scope.alert = scAlert.alert;
+            .controller('testController', function($scope, scAlertService) {
+                $scope.alert = scAlertService.alert;
             });
 
     </script>
@@ -56,6 +56,11 @@
     <h4>Html content</h4>
     <div class="panel-body">
         <button class="btn btn-success" ng-click="alert('success', 'Text <a href=\'#\'>Link</a> <b>Bold</b>', null, {html: true})">Custom parent</button>
+    </div>
+
+    <h4>Directive</h4>
+    <div class="panel-body">
+        <sc-alert type="success" config="{timeout: 0}"></sc-alert>
     </div>
 
 </div>
