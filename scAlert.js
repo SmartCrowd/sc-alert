@@ -50,7 +50,7 @@
             return {
                 restrict: 'E',
                 templateUrl: "templates/scAlert/alert.html",
-                scope: { config: "@", type: "@", content: "=" },
+                scope: { config: "@", type: "@", content: "@" },
                 link: function (scope, element, attributes) {
                     scope.destroy = false;
                     scope.title = scope.title || scAlert.titles[scope.type];
@@ -70,7 +70,7 @@
         })
         .service('scAlertService', function($templateCache, $compile, $document, scAlert) {
             var self = this;
-            self.template = '<sc-alert type="{{type}}" config="{{config}}" content="content" title="title"></sc-alert>';
+            self.template = '<sc-alert type="{{type}}" config="{{config}}" content="{{content}}" title="title"></sc-alert>';
             self.alert = function(type, content, title, user_config) {
                 var scope = this.$new(true);
                 scope.type = type;
