@@ -68,6 +68,6 @@ angular.module('app').config(function (scAlertProvider) {
 ```
 Or you always can change some options right in service methods
 ```
-scAlertService.alert("success", "Success message", "Success title", {dismissible: false});
-scAlertService.success("Success message", "Success title", {dismissible: false});
+scAlertService.alert("success", "Success message", null, {dismissible: false});
+scAlertService.success("Success message", null, {dismissible: false});
 ```
