@@ -18,7 +18,7 @@
                 scope.destroy = false;
                 scope.inner_title = scope.title && (scope.title != "") ? scope.title : scAlert.titles[scope.type];
                 scope.params = scAlertService.mergeConfig(scope.$eval(scope.config));
-                scope.text = scope.params.html ? $sce.trustAsHtml(scope.content) : scope.content;
+                scope.text = scope.params.allow_html ? $sce.trustAsHtml(scope.content) : scope.content;
                 scope.classes = angular.extend(scAlertService.alertClasses(scope.type), scope.params.classes);
                 scope.close = function () {
                     scope.$destroy();
@@ -40,8 +40,8 @@
                 '<span aria-hidden="true" ng-click="close()">&times;</span>' +
                 '</div>' +
                 '<strong ng-if="params.show_title" ng-bind="inner_title"></strong> ' +
-                '<span ng-if="params.html" ng-bind-html="text"></span>' +
-                '<span ng-if="!params.html" ng-bind="text"></span>' +
+                '<span ng-if="params.allow_html" ng-bind-html="text"></span>' +
+                '<span ng-if="!params.allow_html" ng-bind="text"></span>' +
                 '</div>'
             );
         }
@@ -97,12 +97,13 @@
 
     function scAlertProvider() {
         var config = {
-            parent: 'body',
+            // Directive config
             show_title: true,
-            html: false,
+            allow_html: false,
             dismissible: true,
             timeout: 5000,
-            // Element attach method:angular 'append' or 'prepend'
+            // Service config
+            parent: 'body',
             method: 'append'
         };
         var titles = {
