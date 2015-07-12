@@ -11,57 +11,79 @@
 
         angular
             .module('test', ['sc-alert'])
+            .config(function (scAlertProvider) {
+                scAlertProvider.setConfig({
+                    parent: "#errors",
+                    classes: {
+                        animated: true,
+                        fadeIn: true
+                    }
+                });
+            })
             .controller('testController', function($scope, scAlertService) {
+                $scope.config = scAlertService.getConfig();
                 $scope.alert = scAlertService.alert;
+                $scope.content = "Example message";
+                $scope.title = "";
             });
 
     </script>
 </head>
 <body ng-app="test" ng-controller="testController">
 
+<div id="errors" style="position: absolute; top: 0; left: 0; right: 0;">
+
+</div>
+
 <div class="container">
 
     <h1>SC Alert</h1>
+    <p>Simple angular-js directive for generating bootstrap alerts</p>
 
-    <br>
-
-    <h4>Four bootstrap styles</h4>
     <div class="panel-body">
-        <button class="btn btn-success" ng-click="alert('success', 'Message example')">Success</button>
-        <button class="btn btn-info" ng-click="alert('info', 'Message example')">Info</button>
-        <button class="btn btn-warning" ng-click="alert('warning', 'Message example')">Warning</button>
-        <button class="btn btn-danger" ng-click="alert('danger', 'Message example')">Danger</button>
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" ng-model="title">
+        </div>
+        <div class="form-group">
+            <label>Message</label>
+            <textarea class="form-control" ng-model="content"></textarea>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" ng-model="config.html">
+                Allow html content
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" ng-model="config.dismissible">
+                Close button
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Parent element</label>
+            <input class="form-control" type="text" ng-model="config.parent">
+            <br>
+            <a class="btn btn-primary btn-xs" ng-click="config.parent='body'">tag</a>
+            <a class="btn btn-primary btn-xs" ng-click="config.parent='#errors'">#id</a>
+            <a class="btn btn-primary btn-xs" ng-click="config.parent='.some-class'">.class</a>
+        </div>
+        <div class="form-group">
+            <label>Time To Life (Empty for disabling TTL)</label>
+            <input class="form-control" type="text" ng-model="config.timeout">
+        </div>
     </div>
-
-    <h4>Optional dismiss button</h4>
-    <div class="panel-body">
-        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {dismissible: false})">Not dismissable</button>
-    </div>
-
-    <h4>Configurable parent element</h4>
-    <div id="parent" class="panel-body">
-        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {parent: '#parent'})">Custom parent</button>
-    </div>
-
-    <h4>Animated (animate.css)</h4>
-    <div class="panel-body">
-        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {classes: {animated: true, fadeInDown: true}})">Custom parent</button>
-    </div>
-
-    <h4>Without timeout</h4>
-    <div class="panel-body">
-        <button class="btn btn-success" ng-click="alert('success', 'Message example', null, {timeout: false})">Custom parent</button>
-    </div>
-
-    <h4>Html content</h4>
-    <div class="panel-body">
-        <button class="btn btn-success" ng-click="alert('success', 'Text <a href=\'#\'>Link</a> <b>Bold</b>', null, {html: true})">Custom parent</button>
+    <div class="panel-body some-class">
+        <button class="btn btn-success" ng-click="alert('success', content, title, config)">Success</button>
+        <button class="btn btn-info" ng-click="alert('info', content, title, config)">Info</button>
+        <button class="btn btn-warning" ng-click="alert('warning', content, title, config)">Warning</button>
+        <button class="btn btn-danger" ng-click="alert('danger', content, title, config)">Danger</button>
     </div>
 
     <h4>Directive</h4>
-    <div class="panel-body">
-        <sc-alert type="success" content="Hello world" config="{timeout: 0}"></sc-alert>
-    </div>
+    <pre>&lt;sc-alert type="info" content="Hello world" config="{timeout: 0}">&lt;/sc-alert></pre>
+    <sc-alert type="info" content="Hello world" config="{timeout: 0}"></sc-alert>
 
 </div>
 
