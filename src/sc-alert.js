@@ -24,7 +24,7 @@
                     scope.$destroy();
                     element.remove();
                 };
-                if (scope.params.timeout) {
+                if (scope.params.timeout > 0) {
                     $timeout(scope.close, scope.params.timeout);
                 }
 
