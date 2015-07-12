@@ -1,5 +1,5 @@
 # sc-alert
-Bootstrap alert generator directive for angularjs
+Bootstrap alert generator directive for angularjs. [DEMO](http://plnkr.co:80/CDqgTuR0mETHOTXqrWus)
 
 # Installation
 Include `sc-alert.js` file and load 'sc-alert' module to your angular app
