@@ -47,16 +47,22 @@
         }
     }
 
-    function scAlertService($compile, scAlert) {
+    function scAlertService($compile, $interpolate, scAlert) {
         var self = this;
         self.template = '<sc-alert type="{{type}}" config="{{config}}" content="{{content}}" title="{{title}}"></sc-alert>';
         self.alert = function(type, content, title, user_config) {
-            var scope = this.$new(true);
+            var config = self.mergeConfig(user_config);
+            var scope = getParent(config.parent).scope();
+
+            var start_symbols = $interpolate.startSymbol();
+            var end_symbols = $interpolate.endSymbol();
 
             scope.type    = type;
             scope.title   = title;
             scope.content = content;
-            scope.config  = self.mergeConfig(user_config);
+            scope.config  = config;
+            self.template = self.template.replace(/\{\{/g, start_symbols);
+            self.template = self.template.replace(/\}\}/g, end_symbols);
 
             scope.alert = $compile(self.template)(scope);
             getParent(scope.config.parent)[scope.config.method](scope.alert);
