@@ -1,7 +1,7 @@
 {
   "name": "sc-flash",
   "description": "Bootstrap alert messages for Angular Js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": [
     "src/sc-alert.js"
   ],
