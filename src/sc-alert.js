@@ -36,8 +36,8 @@
         if ($templateCache.get('templates/scAlert/alert.html') === undefined) {
             $templateCache.put("templates/scAlert/alert.html",
                 '<div ng-if="!destroy" ng-class="classes">' +
-                '<div ng-if="params.dismissible" type="button" class="close" aria-label="Close">' +
-                '<span aria-hidden="true" ng-click="close()">&times;</span>' +
+                '<div ng-if="params.dismissible" type="button" class="close" aria-label="Close" ng-click="close()">' +
+                '<span aria-hidden="true">&times;</span>' +
                 '</div>' +
                 '<strong ng-if="params.show_title" ng-bind="inner_title"></strong> ' +
                 '<span ng-if="params.allow_html" ng-bind-html="text"></span>' +
